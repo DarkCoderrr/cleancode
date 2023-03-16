@@ -1,0 +1,4 @@
+com\DistributedSystems\controller\ResourceServlet.class
+com\DistributedSystems\model\Skiers.class
+com\DistributedSystems\SpringBootAppStarter.class
+com\DistributedSystems\WebConfig.class
