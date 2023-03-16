@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-
+ @RestController
 public class SpringBootAppStarter extends SpringBootServletInitializer {
 
     @Override
