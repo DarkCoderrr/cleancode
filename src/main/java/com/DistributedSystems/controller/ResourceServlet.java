@@ -22,6 +22,37 @@ public class ResourceServlet extends HttpServlet {
     private ConcurrentHashMap<String, Skiers> skiersMap = new ConcurrentHashMap<>();
     private int skierIdCounter = 1;
     private Gson gson = new Gson();
+    
+    
+    
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            String skierId = request.getParameter("skierId");
+            if (skierId == null) {
+                // if no skierId parameter provided, return all skiers
+                response.setContentType("application/json");
+                PrintWriter writer = response.getWriter();
+                writer.write(gson.toJson(skiersMap));
+                writer.close();
+            } else {
+                // if skierId parameter provided, return the skier with that id
+                Skiers skier = skiersMap.get(skierId);
+                if (skier == null) {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    PrintWriter writer = response.getWriter();
+                    writer.write("Skier with ID " + skierId + " not found");
+                    writer.close();
+                } else {
+                    response.setContentType("application/json");
+                    PrintWriter writer = response.getWriter();
+                    writer.write(gson.toJson(skier));
+                    writer.close();
+                }
+            }
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
